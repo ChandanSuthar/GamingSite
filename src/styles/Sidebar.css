@@ -1,0 +1,133 @@
+.sidebar {
+  width: 280px;
+  height: 100%;
+  background-color: #000000;
+  border-right: 1px solid #1a1a1a;
+  padding: 20px;
+  color: #ffffff;
+  overflow-y: auto;
+}
+
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.filter-section {
+  padding: 8px 0;
+}
+
+.filter-section h3 {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.filter-select {
+  width: 100%;
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  color: #ffffff;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+.filter-select:focus {
+  border-color: #444;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+  outline: none;
+}
+
+.filter-select option {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag-button {
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  color: #ffffff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.tag-button:hover {
+  background-color: #333;
+  border-color: #444;
+}
+
+.tag-button.btn-primary {
+  background-color: #333;
+  border-color: #444;
+}
+
+.tag-button.btn-primary:hover {
+  background-color: #444;
+  border-color: #555;
+}
+
+.filter-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.apply-button {
+  width: 100%;
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.apply-button:hover {
+  background-color: #333;
+  border-color: #444;
+}
+
+.reset-button {
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid #333;
+  color: #888;
+  padding: 10px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.reset-button:hover {
+  background-color: #1a1a1a;
+  border-color: #444;
+  color: #ffffff;
+}
+
+/* Scrollbar Styling */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: #444;
+} 

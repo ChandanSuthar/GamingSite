@@ -4,7 +4,7 @@ const API_KEY = import.meta.env.VITE_RAWG_API_KEY;
 const BASE_URL = 'https://api.rawg.io/api';
 
 if (!API_KEY) {
-  console.error('RAWG API key is missing. Please add it to your .env file');
+  throw new Error('RAWG API key is missing. Please add VITE_RAWG_API_KEY to your .env file');
 }
 
 const api = axios.create({
@@ -14,44 +14,66 @@ const api = axios.create({
   },
 });
 
-export const getGames = async (page = 1, filters = {}) => {
+export const getGames = async (params) => {
   try {
-    const params = {
+    const { 
+      page = 1, 
+      pageSize = 40, 
+      search = '', 
+      category = '', 
+      tags = [], 
+      releaseYear = '',
+      ordering = '-rating' 
+    } = params;
+
+    const queryParams = {
       page,
-      page_size: 20,
-      ...filters,
+      page_size: pageSize,
+      search: search?.trim() || '',
+      ordering,
     };
 
-    const response = await api.get('/games', { params });
-    return response.data;
+    // Add category filter
+    if (category) {
+      queryParams.genres = category.toLowerCase();
+    }
+
+    // Add tags filter
+    if (tags && tags.length > 0) {
+      queryParams.tags = tags.map(tag => tag.toLowerCase()).join(',');
+    }
+
+    // Add release year filter
+    if (releaseYear) {
+      const startDate = `${releaseYear}-01-01`;
+      const endDate = `${releaseYear}-12-31`;
+      queryParams.dates = `${startDate},${endDate}`;
+    }
+
+    const response = await api.get('/games', { params: queryParams });
+    return {
+      results: response.data.results || [],
+      hasMore: response.data.next !== null,
+      count: response.data.count || 0
+    };
   } catch (error) {
     console.error('Error fetching games:', error);
-    throw new Error('Failed to fetch games. Please try again later.');
+    throw new Error(error.response?.data?.error || 'Failed to fetch games. Please try again later.');
   }
 };
 
-export const getGameDetails = async (id) => {
+export const getGameDetails = async (gameId) => {
+  if (!gameId) {
+    throw new Error('Game ID is required');
+  }
+
   try {
-    const response = await api.get(`/games/${id}`);
+    const response = await api.get(`/games/${gameId}`);
     return response.data;
   } catch (error) {
     console.error('Error fetching game details:', error);
-    throw new Error('Failed to fetch game details. Please try again later.');
+    throw new Error(error.response?.data?.error || 'Failed to fetch game details. Please try again later.');
   }
 };
 
-export const searchGames = async (query, page = 1) => {
-  try {
-    const params = {
-      search: query,
-      page,
-      page_size: 20,
-    };
-
-    const response = await api.get('/games', { params });
-    return response.data;
-  } catch (error) {
-    console.error('Error searching games:', error);
-    throw new Error('Failed to search games. Please try again later.');
-  }
-}; 
+export default api; 

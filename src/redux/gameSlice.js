@@ -2,17 +2,18 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   games: [],
-  favorites: [],
   loading: false,
   error: null,
-  currentPage: 1,
-  totalPages: 1,
   filters: {
     category: '',
     tags: [],
     releaseYear: '',
-    popularity: '',
+    ordering: '-rating',
   },
+  searchQuery: '',
+  currentPage: 1,
+  hasMore: true,
+  favorites: [],
 };
 
 const gameSlice = createSlice({
@@ -22,41 +23,59 @@ const gameSlice = createSlice({
     setGames: (state, action) => {
       state.games = action.payload;
     },
+    appendGames: (state, action) => {
+      state.games = [...state.games, ...action.payload];
+    },
     setLoading: (state, action) => {
       state.loading = action.payload;
     },
     setError: (state, action) => {
       state.error = action.payload;
     },
+    setFilters: (state, action) => {
+      state.filters = { ...state.filters, ...action.payload };
+      state.currentPage = 1; // Reset page when filters change
+      state.games = []; // Clear existing games when filters change
+    },
+    resetFilters: (state) => {
+      state.filters = initialState.filters;
+      state.currentPage = 1;
+      state.games = [];
+    },
+    setSearchQuery: (state, action) => {
+      state.searchQuery = action.payload;
+      state.currentPage = 1;
+      state.games = [];
+    },
     setCurrentPage: (state, action) => {
       state.currentPage = action.payload;
     },
-    setTotalPages: (state, action) => {
-      state.totalPages = action.payload;
+    setHasMore: (state, action) => {
+      state.hasMore = action.payload;
     },
-    setFilters: (state, action) => {
-      state.filters = { ...state.filters, ...action.payload };
-    },
-    addToFavorites: (state, action) => {
-      if (!state.favorites.some(game => game.id === action.payload.id)) {
-        state.favorites.push(action.payload);
+    toggleFavorite: (state, action) => {
+      const gameId = action.payload;
+      const index = state.favorites.indexOf(gameId);
+      if (index === -1) {
+        state.favorites.push(gameId);
+      } else {
+        state.favorites.splice(index, 1);
       }
-    },
-    removeFromFavorites: (state, action) => {
-      state.favorites = state.favorites.filter(game => game.id !== action.payload);
     },
   },
 });
 
 export const {
   setGames,
+  appendGames,
   setLoading,
   setError,
-  setCurrentPage,
-  setTotalPages,
   setFilters,
-  addToFavorites,
-  removeFromFavorites,
+  resetFilters,
+  setSearchQuery,
+  setCurrentPage,
+  setHasMore,
+  toggleFavorite,
 } = gameSlice.actions;
 
 export default gameSlice.reducer; 

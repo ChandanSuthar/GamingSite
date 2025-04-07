@@ -1,0 +1,121 @@
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000;
+  padding: 20px;
+}
+
+.auth-box {
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.auth-box h1 {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.auth-form {
+  width: 100%;
+}
+
+.auth-card {
+  background-color: #1a1a1a !important;
+  border: 1px solid #333 !important;
+  border-radius: 8px !important;
+  padding: 2rem !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+.auth-title {
+  color: #ffffff !important;
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 1rem !important;
+}
+
+.auth-subtitle {
+  color: #888 !important;
+  font-size: 1rem !important;
+  margin-bottom: 2rem !important;
+}
+
+.auth-social-button {
+  background-color: #333 !important;
+  border: 1px solid #444 !important;
+  color: #ffffff !important;
+  padding: 0.75rem 1rem !important;
+  border-radius: 4px !important;
+  width: 100% !important;
+  margin-bottom: 1rem !important;
+  transition: all 0.2s ease !important;
+}
+
+.auth-social-button:hover {
+  background-color: #444 !important;
+  border-color: #555 !important;
+}
+
+.auth-submit-button {
+  background-color: #1a1a1a !important;
+  border: 1px solid #333 !important;
+  color: #ffffff !important;
+  padding: 0.75rem 1.5rem !important;
+  border-radius: 4px !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease !important;
+}
+
+.auth-submit-button:hover {
+  background-color: #333 !important;
+  border-color: #444 !important;
+}
+
+.auth-link {
+  color: #888 !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease !important;
+}
+
+.auth-link:hover {
+  color: #ffffff !important;
+}
+
+/* Form Fields */
+.cl-formButtonPrimary {
+  background-color: #1a1a1a !important;
+  border: 1px solid #333 !important;
+  color: #ffffff !important;
+}
+
+.cl-formButtonPrimary:hover {
+  background-color: #333 !important;
+  border-color: #444 !important;
+}
+
+.cl-input {
+  background-color: #1a1a1a !important;
+  border: 1px solid #333 !important;
+  color: #ffffff !important;
+}
+
+.cl-input:focus {
+  border-color: #444 !important;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1) !important;
+}
+
+.cl-inputLabel {
+  color: #888 !important;
+}
+
+/* Error Messages */
+.cl-alert {
+  background-color: rgba(255, 68, 68, 0.1) !important;
+  border: 1px solid #ff4444 !important;
+  color: #ff4444 !important;
+} 
